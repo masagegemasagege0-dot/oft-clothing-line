@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OFT — OFT's Atelier</title>
+<link rel="icon" type="image/webp" href="assets/logo.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/loader.css">
+<script src="js/loader.js"></script>
+</head>
+<body>
+<header class="top">
+  <a class="logo" id="logoL" href="#" aria-label="OFT home"></a>
+  <div class="nav">
+    <div class="sels"><select id="cat" aria-label="Category"></select><select id="type" aria-label="Clothing type"></select></div>
+    <button class="search-toggle" id="searchToggle" type="button" aria-expanded="false" aria-controls="siteSearch"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><span>Search</span></button>
+    <div class="site-search" id="siteSearch" hidden><label for="siteSearchInput">Search OFT</label><div class="search-field"><input id="siteSearchInput" type="search" placeholder="Search products, categories, help…" autocomplete="off"><button id="searchClose" type="button" aria-label="Close search">×</button></div><div id="searchResults" class="search-results" aria-live="polite"></div></div>
+  </div>
+</header>
+
+<main id="landing">
+  <div class="hero">
+    <h1>OFT's <span>atelier</span></h1>
+    <p class="sub">Earthy pieces that change colour with your mood. Pick one from the line and make it yours.</p>
+  </div>
+  <div class="stage" id="stage">
+    <svg class="rope" id="rope" aria-hidden="true" focusable="false"></svg>
+    <div class="track" id="track"></div>
+    <svg class="rope front" id="ropeFront" aria-hidden="true" focusable="false"></svg>
+    <div class="empty" id="empty" hidden></div>
+  </div>
+  <div class="controls">
+    <div class="dock" role="group" aria-label="Line controls">
+      <button id="linePrev" aria-label="Scroll to previous clothes" aria-keyshortcuts="P"><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 6l-6 6 6 6"/></svg><sup>P</sup></span><span class="lbl">Previous</span></button>
+      <button id="reverse" aria-label="Reverse direction"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.5-4.2M4 4.5v4h4"/><path d="M4 13a8 8 0 0 0 14.5 4.2M20 19.5v-4h-4"/></svg><span class="lbl">Reverse</span></button>
+      <button id="toggle" aria-label="Pause or play"><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6v12M8.5 6v12"/><path d="M13 6l8 6-8 6z"/></svg><span class="lbl">Pause</span></button>
+      <button id="lineNext" aria-label="Scroll to next clothes" aria-keyshortcuts="N"><span class="lbl">Next</span><span class="arr"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg><sup>N</sup></span></button>
+    </div>
+  </div>
+  <p class="hint">Drag or swipe to browse the line · use your scroll wheel · hover for a soft breeze · click a tee to see it up close.</p>
+</main>
+<div id="footL"></div>
+
+<section id="detail" hidden>
+  <div class="dbar"><a class="logo" id="logoD" href="#" aria-label="Back to the line"></a><button id="back" class="back">Back to the line</button></div>
+  <div class="dmain">
+    <div class="view" id="view"></div>
+    <div class="info">
+      <h2 id="pname"></h2>
+      <div class="tags" id="tags"></div>
+      <div class="buy">
+        <div class="qty" id="qty" role="group" aria-label="Quantity"><button data-d="-1" aria-label="Less">−</button><output id="q">1</output><button data-d="1" aria-label="More">+</button></div>
+        <div class="price"><div class="amt"><b id="amt"></b><small id="each"></small></div>
+          <div class="cur" id="cur" role="group" aria-label="Currency"><button data-c="KES">KES</button><button data-c="USD">USD</button><button data-c="EUR">EUR</button></div></div>
+      </div>
+      <p class="desc" id="desc"></p>
+      <div class="modal-actions">
+        <a class="catalogue" href="https://wa.me/c/254757806940" target="_blank" rel="noopener">View catalogue</a>
+        <a class="wa" id="wa" target="_blank" rel="noopener">Chat with us on WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div id="footD"></div>
+</section>
+
+<div id="policyDialog" class="policy-dialog" hidden role="dialog" aria-modal="true" aria-labelledby="policyTitle">
+  <article class="policy-sheet"><header><h2 id="policyTitle">Store policy</h2><button id="policyClose" type="button" aria-label="Close policy">Close ✕</button></header><div id="policyBody" class="policy-body"></div></article>
+</div>
+
+<div id="help">
+  <div class="panel" id="panel" hidden></div>
+  <button id="bubble" aria-label="Support" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg></button>
+</div>
+
+<!-- Logo + colour filters (do not remove). -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="softClothRipple" x="-8%" y="-8%" width="116%" height="116%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.035" numOctaves="2" seed="8" result="fabricNoise"/>
+    <feDisplacementMap in="SourceGraphic" in2="fabricNoise" scale="1.8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <symbol id="logo" viewBox="0 0 40 40"><rect width="40" height="40" rx="10" fill="#1d1f1a"/><path d="M20 22v-3c-3-4 4-7 4-3" fill="none" stroke="#d9cdb4" stroke-width="2.4" stroke-linecap="round"/><path d="M7 31l13-9 13 9z" fill="none" stroke="#d9cdb4" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></symbol>
+</svg>
+
+<script src="js/app.js"></script>
+</body>
+</html>
